@@ -741,3 +741,57 @@ input[type="file"] {
     background: #2a2a2a;
   }
 }
+
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #111;
+  border-bottom: 1px solid #222;
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.toolbar-btn {
+  padding: 0.5rem 0.75rem;
+  background: #222;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.toolbar-btn:hover:not(:disabled) {
+  background: #333;
+}
+
+.toolbar-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.info-box {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.info-box p {
+  margin: 0.25rem 0;
+}
+
+.info-box strong {
+  color: #fff;
+}
