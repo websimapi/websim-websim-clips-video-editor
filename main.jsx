@@ -9,6 +9,8 @@ const App = () => {
   const [selectedClip, setSelectedClip] = useState(null);
   const [showGallery, setShowGallery] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [propertiesOpen, setPropertiesOpen] = useState(false);
   const videoClips = React.useSyncExternalStore(
     room.collection("video_clip_v2").subscribe,
     room.collection("video_clip_v2").getList
@@ -48,38 +50,66 @@ const App = () => {
   }, 90);
   return /* @__PURE__ */ jsxDEV(Fragment, { children: [
     /* @__PURE__ */ jsxDEV("div", { className: "header", children: [
-      /* @__PURE__ */ jsxDEV("div", { className: "header-left", children: /* @__PURE__ */ jsxDEV("div", { className: "logo", children: [
-        /* @__PURE__ */ jsxDEV("div", { className: "logo-icon", children: "\u{1F3AC}" }, void 0, false, {
+      /* @__PURE__ */ jsxDEV("div", { className: "header-left", children: [
+        /* @__PURE__ */ jsxDEV("button", { className: "mobile-toggle", onClick: () => setSidebarOpen(!sidebarOpen), children: "\u2630" }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 70,
-          columnNumber: 13
-        }),
-        "Websim Clips"
-      ] }, void 0, true, {
-        fileName: "<stdin>",
-        lineNumber: 69,
-        columnNumber: 11
-      }) }, void 0, false, {
-        fileName: "<stdin>",
-        lineNumber: 68,
-        columnNumber: 9
-      }),
-      /* @__PURE__ */ jsxDEV("div", { className: "header-actions", children: [
-        /* @__PURE__ */ jsxDEV("button", { className: "btn", onClick: () => setShowGallery(true), children: "\u{1F4DA} Gallery" }, void 0, false, {
-          fileName: "<stdin>",
-          lineNumber: 75,
+          lineNumber: 71,
           columnNumber: 11
         }),
-        /* @__PURE__ */ jsxDEV("label", { className: "btn btn-primary", children: [
-          "\u2B06\uFE0F Upload Video",
-          /* @__PURE__ */ jsxDEV("input", { type: "file", accept: "video/*", onChange: handleFileUpload }, void 0, false, {
+        /* @__PURE__ */ jsxDEV("div", { className: "logo", children: [
+          /* @__PURE__ */ jsxDEV("div", { className: "logo-icon", children: "\u{1F3AC}" }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 80,
+            lineNumber: 75,
+            columnNumber: 13
+          }),
+          /* @__PURE__ */ jsxDEV("span", { children: "Websim Clips" }, void 0, false, {
+            fileName: "<stdin>",
+            lineNumber: 76,
             columnNumber: 13
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 78,
+          lineNumber: 74,
+          columnNumber: 11
+        })
+      ] }, void 0, true, {
+        fileName: "<stdin>",
+        lineNumber: 70,
+        columnNumber: 9
+      }),
+      /* @__PURE__ */ jsxDEV("div", { className: "header-actions", children: [
+        /* @__PURE__ */ jsxDEV("button", { className: "btn", onClick: () => setShowGallery(true), children: [
+          "\u{1F4DA} ",
+          /* @__PURE__ */ jsxDEV("span", { children: "Gallery" }, void 0, false, {
+            fileName: "<stdin>",
+            lineNumber: 81,
+            columnNumber: 16
+          })
+        ] }, void 0, true, {
+          fileName: "<stdin>",
+          lineNumber: 80,
+          columnNumber: 11
+        }),
+        /* @__PURE__ */ jsxDEV("label", { className: "btn btn-primary", children: [
+          "\u2B06\uFE0F ",
+          /* @__PURE__ */ jsxDEV("span", { children: "Upload" }, void 0, false, {
+            fileName: "<stdin>",
+            lineNumber: 84,
+            columnNumber: 16
+          }),
+          /* @__PURE__ */ jsxDEV("input", { type: "file", accept: "video/*", onChange: handleFileUpload }, void 0, false, {
+            fileName: "<stdin>",
+            lineNumber: 85,
+            columnNumber: 13
+          })
+        ] }, void 0, true, {
+          fileName: "<stdin>",
+          lineNumber: 83,
+          columnNumber: 11
+        }),
+        /* @__PURE__ */ jsxDEV("button", { className: "mobile-toggle", onClick: () => setPropertiesOpen(!propertiesOpen), children: "\u2699\uFE0F" }, void 0, false, {
+          fileName: "<stdin>",
+          lineNumber: 87,
           columnNumber: 11
         }),
         currentUser && /* @__PURE__ */ jsxDEV(
@@ -93,42 +123,45 @@ const App = () => {
           false,
           {
             fileName: "<stdin>",
-            lineNumber: 83,
+            lineNumber: 91,
             columnNumber: 13
           }
         )
       ] }, void 0, true, {
         fileName: "<stdin>",
-        lineNumber: 74,
+        lineNumber: 79,
         columnNumber: 9
       })
     ] }, void 0, true, {
       fileName: "<stdin>",
-      lineNumber: 67,
+      lineNumber: 69,
       columnNumber: 7
     }),
     /* @__PURE__ */ jsxDEV("div", { className: "main-container", children: [
-      /* @__PURE__ */ jsxDEV("div", { className: "sidebar", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: `sidebar ${sidebarOpen ? "open" : ""}`, children: [
         /* @__PURE__ */ jsxDEV("div", { className: "sidebar-section", children: [
           /* @__PURE__ */ jsxDEV("div", { className: "sidebar-title", children: "Video Library" }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 95,
+            lineNumber: 103,
             columnNumber: 13
           }),
-          /* @__PURE__ */ jsxDEV("div", { className: "gallery-grid", children: videoClips.reverse().slice(0, 6).map((clip) => /* @__PURE__ */ jsxDEV(
+          /* @__PURE__ */ jsxDEV("div", { className: "gallery-grid", children: videoClips.slice(0).reverse().slice(0, 6).map((clip) => /* @__PURE__ */ jsxDEV(
             "div",
             {
               className: "gallery-item",
-              onClick: () => handleAddToTimeline(clip),
+              onClick: () => {
+                handleAddToTimeline(clip);
+                setSidebarOpen(false);
+              },
               children: [
                 /* @__PURE__ */ jsxDEV("video", { src: clip.url }, void 0, false, {
                   fileName: "<stdin>",
-                  lineNumber: 103,
+                  lineNumber: 114,
                   columnNumber: 19
                 }),
                 /* @__PURE__ */ jsxDEV("div", { className: "gallery-item-overlay", children: clip.name }, void 0, false, {
                   fileName: "<stdin>",
-                  lineNumber: 104,
+                  lineNumber: 115,
                   columnNumber: 19
                 })
               ]
@@ -137,54 +170,54 @@ const App = () => {
             true,
             {
               fileName: "<stdin>",
-              lineNumber: 98,
+              lineNumber: 106,
               columnNumber: 17
             }
           )) }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 96,
+            lineNumber: 104,
             columnNumber: 13
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 94,
+          lineNumber: 102,
           columnNumber: 11
         }),
         /* @__PURE__ */ jsxDEV("div", { className: "sidebar-section", children: [
           /* @__PURE__ */ jsxDEV("div", { className: "sidebar-title", children: "Assets" }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 111,
+            lineNumber: 122,
             columnNumber: 13
           }),
           /* @__PURE__ */ jsxDEV("label", { className: "upload-area", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "upload-icon", children: "\u{1F3B5}" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 113,
+              lineNumber: 124,
               columnNumber: 15
             }),
             /* @__PURE__ */ jsxDEV("div", { className: "upload-text", children: "Add Audio" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 114,
+              lineNumber: 125,
               columnNumber: 15
             }),
             /* @__PURE__ */ jsxDEV("input", { type: "file", accept: "audio/*" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 115,
+              lineNumber: 126,
               columnNumber: 15
             })
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 112,
+            lineNumber: 123,
             columnNumber: 13
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 110,
+          lineNumber: 121,
           columnNumber: 11
         })
       ] }, void 0, true, {
         fileName: "<stdin>",
-        lineNumber: 93,
+        lineNumber: 101,
         columnNumber: 9
       }),
       /* @__PURE__ */ jsxDEV("div", { className: "editor-container", children: [
@@ -205,38 +238,38 @@ const App = () => {
           false,
           {
             fileName: "<stdin>",
-            lineNumber: 124,
+            lineNumber: 135,
             columnNumber: 17
           }
         ) }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 123,
+          lineNumber: 134,
           columnNumber: 15
         }) : /* @__PURE__ */ jsxDEV("div", { className: "empty-state", children: [
           /* @__PURE__ */ jsxDEV("div", { className: "empty-state-icon", children: "\u{1F3AC}" }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 138,
+            lineNumber: 149,
             columnNumber: 17
           }),
           /* @__PURE__ */ jsxDEV("div", { className: "empty-state-text", children: "Upload a video or select from the gallery to get started" }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 139,
+            lineNumber: 150,
             columnNumber: 17
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 137,
+          lineNumber: 148,
           columnNumber: 15
         }) }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 121,
+          lineNumber: 132,
           columnNumber: 11
         }),
         /* @__PURE__ */ jsxDEV("div", { className: "timeline-container", children: [
           /* @__PURE__ */ jsxDEV("div", { className: "timeline-header", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "timeline-title", children: "Timeline" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 148,
+              lineNumber: 159,
               columnNumber: 15
             }),
             /* @__PURE__ */ jsxDEV("div", { style: { fontSize: "0.75rem", color: "#666" }, children: [
@@ -244,34 +277,37 @@ const App = () => {
               "s"
             ] }, void 0, true, {
               fileName: "<stdin>",
-              lineNumber: 149,
+              lineNumber: 160,
               columnNumber: 15
             })
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 147,
+            lineNumber: 158,
             columnNumber: 13
           }),
           /* @__PURE__ */ jsxDEV("div", { className: "timeline-tracks", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "track", children: [
               /* @__PURE__ */ jsxDEV("div", { className: "track-header", children: /* @__PURE__ */ jsxDEV("div", { className: "track-label", children: "Video Track" }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 157,
+                lineNumber: 168,
                 columnNumber: 19
               }) }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 156,
+                lineNumber: 167,
                 columnNumber: 17
               }),
               /* @__PURE__ */ jsxDEV("div", { className: "track-clips", children: clips.length === 0 ? /* @__PURE__ */ jsxDEV("div", { style: { color: "#666", fontSize: "0.75rem" }, children: "No clips yet" }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 161,
+                lineNumber: 172,
                 columnNumber: 21
               }) : clips.map((clip, index) => /* @__PURE__ */ jsxDEV(
                 "div",
                 {
                   className: "clip",
-                  onClick: () => setSelectedClip(clip),
+                  onClick: () => {
+                    setSelectedClip(clip);
+                    setPropertiesOpen(true);
+                  },
                   onDoubleClick: () => handleRemoveClip(index),
                   children: clip.name?.substring(0, 12) || `Clip ${index + 1}`
                 },
@@ -279,69 +315,69 @@ const App = () => {
                 false,
                 {
                   fileName: "<stdin>",
-                  lineNumber: 166,
+                  lineNumber: 177,
                   columnNumber: 23
                 }
               )) }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 159,
+                lineNumber: 170,
                 columnNumber: 17
               })
             ] }, void 0, true, {
               fileName: "<stdin>",
-              lineNumber: 155,
+              lineNumber: 166,
               columnNumber: 15
             }),
             /* @__PURE__ */ jsxDEV("div", { className: "track", children: [
               /* @__PURE__ */ jsxDEV("div", { className: "track-header", children: /* @__PURE__ */ jsxDEV("div", { className: "track-label", children: "Audio Track" }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 181,
+                lineNumber: 195,
                 columnNumber: 19
               }) }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 180,
+                lineNumber: 194,
                 columnNumber: 17
               }),
               /* @__PURE__ */ jsxDEV("div", { className: "track-clips", children: /* @__PURE__ */ jsxDEV("div", { style: { color: "#666", fontSize: "0.75rem" }, children: "No audio clips" }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 184,
+                lineNumber: 198,
                 columnNumber: 19
               }) }, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 183,
+                lineNumber: 197,
                 columnNumber: 17
               })
             ] }, void 0, true, {
               fileName: "<stdin>",
-              lineNumber: 179,
+              lineNumber: 193,
               columnNumber: 15
             })
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 154,
+            lineNumber: 165,
             columnNumber: 13
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 146,
+          lineNumber: 157,
           columnNumber: 11
         })
       ] }, void 0, true, {
         fileName: "<stdin>",
-        lineNumber: 120,
+        lineNumber: 131,
         columnNumber: 9
       }),
-      /* @__PURE__ */ jsxDEV("div", { className: "properties-panel", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: `properties-panel ${propertiesOpen ? "open" : ""}`, children: [
         /* @__PURE__ */ jsxDEV("div", { className: "sidebar-title", children: "Properties" }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 194,
+          lineNumber: 208,
           columnNumber: 11
         }),
         selectedClip ? /* @__PURE__ */ jsxDEV(Fragment, { children: [
           /* @__PURE__ */ jsxDEV("div", { className: "property-group", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "property-label", children: "Clip Name" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 198,
+              lineNumber: 212,
               columnNumber: 17
             }),
             /* @__PURE__ */ jsxDEV(
@@ -356,19 +392,19 @@ const App = () => {
               false,
               {
                 fileName: "<stdin>",
-                lineNumber: 199,
+                lineNumber: 213,
                 columnNumber: 17
               }
             )
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 197,
+            lineNumber: 211,
             columnNumber: 15
           }),
           /* @__PURE__ */ jsxDEV("div", { className: "property-group", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "property-label", children: "Duration" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 207,
+              lineNumber: 221,
               columnNumber: 17
             }),
             /* @__PURE__ */ jsxDEV(
@@ -383,119 +419,119 @@ const App = () => {
               false,
               {
                 fileName: "<stdin>",
-                lineNumber: 208,
+                lineNumber: 222,
                 columnNumber: 17
               }
             )
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 206,
+            lineNumber: 220,
             columnNumber: 15
           }),
           /* @__PURE__ */ jsxDEV("div", { className: "property-group", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "property-label", children: "Opacity" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 216,
+              lineNumber: 230,
               columnNumber: 17
             }),
             /* @__PURE__ */ jsxDEV("input", { type: "range", className: "slider", min: "0", max: "100", defaultValue: "100" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 217,
+              lineNumber: 231,
               columnNumber: 17
             })
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 215,
+            lineNumber: 229,
             columnNumber: 15
           }),
           /* @__PURE__ */ jsxDEV("div", { className: "property-group", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "property-label", children: "Volume" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 220,
+              lineNumber: 234,
               columnNumber: 17
             }),
             /* @__PURE__ */ jsxDEV("input", { type: "range", className: "slider", min: "0", max: "100", defaultValue: "100" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 221,
+              lineNumber: 235,
               columnNumber: 17
             })
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 219,
+            lineNumber: 233,
             columnNumber: 15
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 196,
+          lineNumber: 210,
           columnNumber: 13
         }) : /* @__PURE__ */ jsxDEV("div", { className: "empty-state", children: /* @__PURE__ */ jsxDEV("div", { className: "empty-state-text", children: "Select a clip to view properties" }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 226,
+          lineNumber: 240,
           columnNumber: 15
         }) }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 225,
+          lineNumber: 239,
           columnNumber: 13
         }),
         /* @__PURE__ */ jsxDEV("div", { className: "sidebar-section", children: [
           /* @__PURE__ */ jsxDEV("div", { className: "sidebar-title", children: "History" }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 233,
+            lineNumber: 247,
             columnNumber: 13
           }),
           /* @__PURE__ */ jsxDEV("div", { className: "history-list", children: /* @__PURE__ */ jsxDEV("div", { className: "history-item", children: [
             /* @__PURE__ */ jsxDEV("div", { className: "history-action", children: "Added video clip" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 236,
+              lineNumber: 250,
               columnNumber: 17
             }),
             /* @__PURE__ */ jsxDEV("div", { className: "history-time", children: "Just now" }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 237,
+              lineNumber: 251,
               columnNumber: 17
             })
           ] }, void 0, true, {
             fileName: "<stdin>",
-            lineNumber: 235,
+            lineNumber: 249,
             columnNumber: 15
           }) }, void 0, false, {
             fileName: "<stdin>",
-            lineNumber: 234,
+            lineNumber: 248,
             columnNumber: 13
           })
         ] }, void 0, true, {
           fileName: "<stdin>",
-          lineNumber: 232,
+          lineNumber: 246,
           columnNumber: 11
         })
       ] }, void 0, true, {
         fileName: "<stdin>",
-        lineNumber: 193,
+        lineNumber: 207,
         columnNumber: 9
       })
     ] }, void 0, true, {
       fileName: "<stdin>",
-      lineNumber: 92,
+      lineNumber: 100,
       columnNumber: 7
     }),
     showGallery && /* @__PURE__ */ jsxDEV("div", { className: "modal", onClick: () => setShowGallery(false), children: /* @__PURE__ */ jsxDEV("div", { className: "modal-content", onClick: (e) => e.stopPropagation(), children: [
       /* @__PURE__ */ jsxDEV("div", { className: "modal-header", children: [
         /* @__PURE__ */ jsxDEV("div", { className: "modal-title", children: "Community Gallery" }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 248,
+          lineNumber: 262,
           columnNumber: 15
         }),
         /* @__PURE__ */ jsxDEV("button", { className: "close-btn", onClick: () => setShowGallery(false), children: "\xD7" }, void 0, false, {
           fileName: "<stdin>",
-          lineNumber: 249,
+          lineNumber: 263,
           columnNumber: 15
         })
       ] }, void 0, true, {
         fileName: "<stdin>",
-        lineNumber: 247,
+        lineNumber: 261,
         columnNumber: 13
       }),
-      /* @__PURE__ */ jsxDEV("div", { className: "gallery-grid", children: videoClips.reverse().map((clip) => /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsxDEV("div", { className: "gallery-grid", children: videoClips.slice(0).reverse().map((clip) => /* @__PURE__ */ jsxDEV(
         "div",
         {
           className: "gallery-item",
@@ -503,14 +539,14 @@ const App = () => {
           children: [
             /* @__PURE__ */ jsxDEV("video", { src: clip.url }, void 0, false, {
               fileName: "<stdin>",
-              lineNumber: 260,
+              lineNumber: 274,
               columnNumber: 19
             }),
             /* @__PURE__ */ jsxDEV("div", { className: "gallery-item-overlay", children: [
               clip.name,
               /* @__PURE__ */ jsxDEV("br", {}, void 0, false, {
                 fileName: "<stdin>",
-                lineNumber: 263,
+                lineNumber: 277,
                 columnNumber: 21
               }),
               /* @__PURE__ */ jsxDEV("small", { children: [
@@ -518,12 +554,12 @@ const App = () => {
                 clip.username
               ] }, void 0, true, {
                 fileName: "<stdin>",
-                lineNumber: 264,
+                lineNumber: 278,
                 columnNumber: 21
               })
             ] }, void 0, true, {
               fileName: "<stdin>",
-              lineNumber: 261,
+              lineNumber: 275,
               columnNumber: 19
             })
           ]
@@ -532,31 +568,31 @@ const App = () => {
         true,
         {
           fileName: "<stdin>",
-          lineNumber: 255,
+          lineNumber: 269,
           columnNumber: 17
         }
       )) }, void 0, false, {
         fileName: "<stdin>",
-        lineNumber: 253,
+        lineNumber: 267,
         columnNumber: 13
       })
     ] }, void 0, true, {
       fileName: "<stdin>",
-      lineNumber: 246,
+      lineNumber: 260,
       columnNumber: 11
     }) }, void 0, false, {
       fileName: "<stdin>",
-      lineNumber: 245,
+      lineNumber: 259,
       columnNumber: 9
     })
   ] }, void 0, true, {
     fileName: "<stdin>",
-    lineNumber: 66,
+    lineNumber: 68,
     columnNumber: 5
   });
 };
 createRoot(document.getElementById("app")).render(/* @__PURE__ */ jsxDEV(App, {}, void 0, false, {
   fileName: "<stdin>",
-  lineNumber: 276,
+  lineNumber: 290,
   columnNumber: 51
 }));
