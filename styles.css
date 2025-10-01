@@ -92,6 +92,11 @@ body {
   background: linear-gradient(135deg, #7c8ef5 0%, #8a5bb5 100%);
 }
 
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .main-container {
   display: flex;
   flex: 1;
