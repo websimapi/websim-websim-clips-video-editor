@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { Player } from "@websim/remotion/player";
 import { EditorComposition } from "./composition.jsx";
 import { Input, ALL_FORMATS, BlobSource } from "mediabunny";
-import { promise as webm } from "https://esm.sh/webm-muxer@3.0.3";
+import { Muxer } from "https://esm.sh/webm-muxer@3.0.3";
 const room = new WebsimSocket();
 const App = () => {
   const [clips, setClips] = useState([]);
@@ -254,7 +254,7 @@ const App = () => {
           }
         })
       );
-      const muxer = new webm.Muxer({
+      const muxer = new Muxer({
         target: "buffer",
         video: { codec: "V_VP9", width: canvas.width, height: canvas.height, frameRate: fps },
         audio: { codec: "A_OPUS", sampleRate: audioContext.sampleRate, numberOfChannels: audioDestination.stream.getAudioTracks()[0]?.getSettings().channelCount || 2 },
